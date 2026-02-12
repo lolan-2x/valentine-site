@@ -544,463 +544,7 @@
                 "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Ring.png",
                 "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png",
                 "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png",
-                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Wrapped%20G            flex-direction: column;
-            align-items: center;
-        }
-
-        .emoji-3d-img {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
-        }
-
-        #backBtn {
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        #celebrationSection {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--soft-pink);
-            overflow-y: auto;
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 500;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 50px;
-        }
-
-        .photo-card {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            border-radius: 20px;
-            cursor: pointer;
-            --rot: -3deg;
-            transform: rotate(var(--rot));
-            animation: floatXY 6s ease-in-out infinite;
-            transform-style: preserve-3d;
-        }
-
-        .photo-card:nth-child(even) { --rot: 3deg; animation-duration: 7s; animation-delay: 1s; }
-
-        .photo-card img.main-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .gift-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, #ff8fa3, #ff6b81);
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(255, 107, 129, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .gift-overlay::before { content: ''; position: absolute; width: 30px; height: 100%; background: var(--white); box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-        .gift-overlay::after { content: ''; position: absolute; height: 30px; width: 100%; background: var(--white); box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-        
-        .gift-bow-img {
-            position: absolute;
-            z-index: 3;
-            width: 80px;
-            height: 80px;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-        }
-
-        .photo-card.revealed .gift-overlay {
-            transform: scale(1.1);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        #mailSection {
-            margin-top: 50px;
-            margin-bottom: 80px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .mail-trigger-img {
-            width: 110px;
-            height: 110px;
-            cursor: pointer;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-            animation: bounceMail 2s infinite;
-            transition: transform 0.3s;
-        }
-        .mail-trigger-img:hover { transform: scale(1.1); }
-
-        .feedback-box {
-            display: none; 
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 90%;
-            width: 400px;
-            animation: popIn 0.5s ease-out;
-            position: relative;
-        }
-
-        .feedback-box h2 {
-            font-family: 'Pacifico', cursive;
-            color: var(--primary-pink);
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .feedback-box textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 2px solid var(--soft-pink);
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            resize: none;
-        }
-
-        .feedback-box textarea:focus { outline: none; border-color: var(--primary-pink); }
-        .feedback-box button { background-color: var(--primary-pink); width: 100%; margin-top: 5px; }
-        
-        #thankYouMessage { display: none; text-align: center; padding: 20px; }
-        #thankYouMessage h2 { color: var(--primary-pink); font-size: 1.8rem; }
-        
-        .close-mail-btn {
-            background-color: #eee !important;
-            color: #555 !important;
-            margin-top: 15px !important;
-            font-size: 0.9rem !important;
-            width: auto !important;
-            display: inline-block !important;
-        }
-
-        #dimmedOverlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            animation: fadeIn 0.5s;
-        }
-
-        /* 3. FLY AWAY ANIMATION (Center to Top Right) */
-        .fly-away {
-            animation: flyOff 1.5s ease-in-out forwards;
-        }
-
-        .gift-img {
-            position: fixed;
-            bottom: -50px;
-            width: 60px;
-            height: 60px;
-            animation: floatUp 4s linear infinite;
-            z-index: 600;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
-        }
-
-        @keyframes floatXY {
-            0% { transform: translate(0px, 0px) rotate(var(--rot)); }
-            25% { transform: translate(10px, -15px) rotate(var(--rot)); }
-            50% { transform: translate(-5px, -5px) rotate(var(--rot)); }
-            75% { transform: translate(-10px, 10px) rotate(var(--rot)); }
-            100% { transform: translate(0px, 0px) rotate(var(--rot)); }
-        }
-
-        @keyframes bounceMail { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
-        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
-        @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-
-        /* Moves Element to Top Right Corner and fades out */
-        @keyframes flyOff {
-            0% { 
-                transform: translate(0, 0) scale(1) rotate(0deg); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translate(40vw, -45vh) scale(0.2) rotate(45deg); 
-                opacity: 0; 
-            }
-        }
-
-    </style>
-</head>
-<body>
-
-    <audio id="loveSong" src="https://github.com/lolan-2x/valentine-site/raw/refs/heads/main/violin.mp3" loop></audio>
-
-    <div id="mainScreen">
-        <h1>Happy Valantines day Shifoo 
-            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png" class="inline-emoji" alt="Heart">
-        </h1>
-        <p class="subtext">will you marry me when we grow up? 
-            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Growing%20Heart.png" class="inline-emoji" alt="Pink Heart">
-        </p>
-        <div class="hint" id="hintBox">Don't press 'No'</div>
-        <div class="buttons">
-            <button id="yesBtn" onclick="sheSaidYes()">Yes</button>
-            <button id="noBtn" onclick="shePressedNo()">No</button>
-        </div>
-    </div>
-
-    <div id="angryModal">
-        <div class="modal-content">
-            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Smiling%20Face%20with%20Horns.png" class="emoji-3d-img" alt="Devil Face">
-            <h2>Do press Yes only!</h2>
-            <button id="backBtn" onclick="closeModal()">Back</button>
-        </div>
-    </div>
-
-    <div id="dimmedOverlay">
-        <lottie-player 
-            id="planeAnim"
-            src="https://assets9.lottiefiles.com/packages/lf20_x62chJ.json" 
-            background="transparent" 
-            speed="1" 
-            style="width: 300px; height: 300px;" 
-            loop 
-            autoplay>
-        </lottie-player>
-    </div>
-
-    <div id="celebrationSection">
-        <h1>Yay! love you vaave ! 
-            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png" class="inline-emoji" alt="Heart">
-        </h1>
-        <p>Tap the gifts to see our memories:</p>
-        
-        <div class="gallery">
-            <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/7JY3sm3Q/IMG-20260207-000817 -png.png" class="main-photo" alt="Memory">
-            </div>
-            <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/SwrLSDbR/IMG-20260206-234609 -png.png" class="main-photo" alt="Memory">
-            </div>
-            <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/d473XVYS/IMG-20260206-234702 -png.png" class="main-photo" alt="Memory">
-            </div>
-            <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/k2txPyc5/IMG-20260206-234544 -png.png" class="main-photo" alt="Memory">
-            </div>
-            <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/gFtmPRQ2/IMG-20260206-234725 -png.png" class="main-photo" alt="Memory">
-            </div>
-             <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/TBQx8jz4/IMG-20260206-234518 -png.png" class="main-photo" alt="Memory">
-            </div>
-             <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/pjnTy8Gj/IMG-20260206-234450 -png.png" class="main-photo" alt="Memory">
-            </div>
-             <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/cKVdpRyg/IMG-20260206-234805 -png.png" class="main-photo" alt="Memory">
-            </div>
-             <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/Fqg84CqS/IMG-20260206-234633 -png.png" class="main-photo" alt="Memory">
-            </div>
-             <div class="photo-card" onclick="revealMemory(this)">
-                <div class="gift-overlay"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png" class="gift-bow-img" alt="Ribbon"></div>
-                <img src="https://i.ibb.co/x8PYrbZP/IMG-20260206-234424 -png.png" class="main-photo" alt="Memory">
-            </div>
-        </div>
-
-        <div id="mailSection">
-            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Open%20Mailbox%20with%20Raised%20Flag.png" id="mailTrigger" class="mail-trigger-img" onclick="openMail()" alt="Mailbox">
-            
-            <div class="feedback-box" id="feedbackBox">
-                <div id="formContainer">
-                    <h2>Say something to me 
-                        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Growing%20Heart.png" class="inline-emoji" alt="Heart">
-                    </h2>
-                    <p>(Only I can read this)</p>
-                    
-                    <iframe name="hiddenFrame" style="display:none;"></iframe>
-                    <form action="https://formspree.io/f/mnjbqqro" method="POST" target="hiddenFrame" onsubmit="showThankYou()">
-                        <textarea name="message" placeholder="Type your feelings here..." required></textarea>
-                        <button type="submit">Send 💌</button>
-                    </form>
-                </div>
-                
-                <div id="thankYouMessage">
-                    <h2>Message Sent! 💌</h2>
-                    <p>I can't wait to read it.</p>
-                    <p style="font-size: 3rem; text-align: center;">
-                        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png" class="inline-emoji" style="width: 80px; height: 80px;" alt="Heart">
-                    </p>
-                    <button class="close-mail-btn" onclick="closeMail()">Close</button>
-                    <br>
-                    <button class="home-btn" onclick="goHome()">Go Home 🏠</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let vibrateInterval;
-
-        function shePressedNo() {
-            const noBtn = document.getElementById('noBtn');
-            const modal = document.getElementById('angryModal');
-            noBtn.classList.add('angry-mode');
-            modal.style.display = 'flex';
-            if (navigator.vibrate) {
-                navigator.vibrate([200, 100, 200]);
-                vibrateInterval = setInterval(() => {
-                    navigator.vibrate([200, 100, 200]);
-                }, 1000);
-            }
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('angryModal');
-            const noBtn = document.getElementById('noBtn');
-            modal.style.display = 'none';
-            noBtn.classList.remove('angry-mode');
-            if (vibrateInterval) {
-                clearInterval(vibrateInterval);
-                navigator.vibrate(0);
-            }
-        }
-
-        function sheSaidYes() {
-            const mainScreen = document.getElementById('mainScreen');
-            const celebration = document.getElementById('celebrationSection');
-            const audio = document.getElementById('loveSong');
-
-            // Plays music on user interaction (Click)
-            if(audio) {
-                audio.play().catch(error => {
-                    console.log("Audio Error: File not found or not supported.");
-                });
-            }
-
-            mainScreen.style.display = 'none';
-            celebration.style.display = 'block';
-
-            createFallingGifts();
-        }
-
-        function revealMemory(card) {
-            if (card.classList.contains('revealed')) return;
-            card.classList.add('revealed');
-            if (navigator.vibrate) {
-                navigator.vibrate([800, 50, 400, 50, 100]); 
-            }
-        }
-
-        function openMail() {
-            document.getElementById('mailTrigger').style.display = 'none';
-            document.getElementById('feedbackBox').style.display = 'block';
-        }
-
-        function closeMail() {
-            document.getElementById('feedbackBox').style.display = 'none';
-            document.getElementById('mailTrigger').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('formContainer').style.display = 'block';
-                document.getElementById('thankYouMessage').style.display = 'none';
-                document.querySelector('form').reset();
-            }, 500);
-        }
-
-        // --- ANIMATION SEQUENCE ---
-        function showThankYou() {
-            const overlay = document.getElementById('dimmedOverlay');
-            const lottie = document.getElementById('planeAnim');
-            
-            // 1. Show Overlay
-            overlay.style.display = 'flex';
-            document.getElementById('formContainer').style.display = 'none';
-            
-            // 2. Reset and Prepare Classes
-            lottie.classList.remove('fly-away'); 
-            lottie.classList.remove('animate__bounceInUp'); 
-            void lottie.offsetWidth; // Trigger reflow
-
-            // 3. Step 1: Bounce In Up (From Send Button area)
-            lottie.classList.add('animate__animated', 'animate__bounceInUp');
-
-            // 4. Step 2: Fly Away (To Top Right) after 1 second
-            setTimeout(() => {
-                lottie.classList.remove('animate__bounceInUp');
-                lottie.classList.add('fly-away');
-            }, 1000);
-
-            // 5. Step 3: Show Message after flight finishes (approx 2.5s total)
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.getElementById('thankYouMessage').style.display = 'block';
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-            }, 2500);
-        }
-
-        function goHome() {
-            document.getElementById('celebrationSection').style.display = 'none';
-            document.getElementById('mainScreen').style.display = 'block';
-            const yesBtn = document.getElementById('yesBtn');
-            yesBtn.innerText = "Memories 💖";
-            document.getElementById('noBtn').style.display = 'none';
-            document.getElementById('hintBox').style.display = 'none';
-            closeMail();
-        }
-
-        function createFallingGifts() {
-            const giftUrls = [
-                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Ring.png",
-                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png"
+                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Wrapped%20Gift.png"
             ];
             
             setInterval(() => {
@@ -1013,7 +557,172 @@
                 setTimeout(() => { item.remove(); }, 5000);
             }, 300);
         }
+
+        /* --- FIXED SCRATCH LOGIC --- */
+        function initScratchCards() {
+            const cards = document.querySelectorAll('.photo-card');
+            const ribbonSrc = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png";
+            
+            cards.forEach(card => {
+                const canvas = document.createElement('canvas');
+                canvas.classList.add('scratch-canvas');
+                card.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                let isDrawing = false;
+                let isScrolling = false; 
+                let startX = 0;
+                let startY = 0;
+                let scratchCount = 0; 
+                
+                const width = card.offsetWidth;
+                const height = card.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+
+                // 1. Draw Background (Source Over)
+                ctx.globalCompositeOperation = 'source-over';
+                
+                // Gradient Background
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, "#ff8fa3"); 
+                gradient.addColorStop(1, "#ffc3a0"); 
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+
+                // Polka Dot Pattern
+                ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+                for (let i = 0; i < width; i += 25) {
+                    for (let j = 0; j < height; j += 25) {
+                        ctx.beginPath();
+                        ctx.arc(i, j, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                // White Border
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+                ctx.lineWidth = 4;
+                ctx.strokeRect(15, 15, width - 30, height - 30);
+
+                // Ribbon & Text
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.src = ribbonSrc;
+                img.onload = () => {
+                    ctx.globalCompositeOperation = 'source-over'; // Ensure we draw on top
+                    
+                    const iconSize = 80;
+                    // Shadow
+                    ctx.shadowColor = "rgba(0,0,0,0.2)";
+                    ctx.shadowBlur = 10;
+                    ctx.drawImage(img, (width/2) - (iconSize/2), (height/2) - (iconSize/2) - 10, iconSize, iconSize);
+                    
+                    // Text
+                    ctx.shadowBlur = 5;
+                    ctx.shadowColor = "rgba(0,0,0,0.3)";
+                    ctx.fillStyle = "white";
+                    ctx.font = "600 14px 'Poppins', sans-serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText("Swipe left-to-right to view", width / 2, (height/2) + (iconSize/2) + 20);
+                    
+                    // Reset shadow
+                    ctx.shadowColor = "transparent";
+                    ctx.shadowBlur = 0;
+                };
+
+                ctx.lineWidth = 40;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                const scratch = (x, y) => {
+                    // SWITCH TO ERASER ONLY HERE
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 25, 0, Math.PI * 2, false);
+                    ctx.fill();
+                    
+                    if (Math.random() > 0.8 && navigator.vibrate) navigator.vibrate(5); 
+                    
+                    scratchCount++;
+                    if(scratchCount % 15 === 0) checkReveal();
+                };
+
+                const checkReveal = () => {
+                    try {
+                        const imageData = ctx.getImageData(0, 0, width, height);
+                        const pixels = imageData.data;
+                        let transparentPixels = 0;
+                        for (let i = 0; i < pixels.length; i += 40) {
+                            if (pixels[i + 3] < 128) transparentPixels++;
+                        }
+                        const totalChecked = pixels.length / 40;
+                        const percent = (transparentPixels / totalChecked) * 100;
+
+                        if (percent > 50) {
+                            canvas.classList.add('revealed');
+                            setTimeout(() => { canvas.remove(); }, 1000); 
+                        }
+                    } catch (e) {
+                        if (scratchCount > 80) {
+                            canvas.classList.add('revealed');
+                            setTimeout(() => { canvas.remove(); }, 1000);
+                        }
+                    }
+                };
+
+                // Mouse
+                canvas.addEventListener('mousedown', (e) => { isDrawing = true; });
+                canvas.addEventListener('mouseup', () => { isDrawing = false; checkReveal(); });
+                canvas.addEventListener('mouseleave', () => { isDrawing = false; });
+                canvas.addEventListener('mousemove', (e) => {
+                    if (!isDrawing) return;
+                    const rect = canvas.getBoundingClientRect();
+                    scratch(e.clientX - rect.left, e.clientY - rect.top);
+                });
+
+                // Touch (Smart Detection)
+                canvas.addEventListener('touchstart', (e) => { 
+                    isDrawing = false;
+                    isScrolling = false;
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                });
+                
+                canvas.addEventListener('touchend', () => { 
+                    isDrawing = false; 
+                    checkReveal(); 
+                });
+                
+                canvas.addEventListener('touchmove', (e) => {
+                    if (isScrolling) return; 
+
+                    const currentX = e.touches[0].clientX;
+                    const currentY = e.touches[0].clientY;
+                    
+                    if (!isDrawing) {
+                        const deltaX = Math.abs(currentX - startX);
+                        const deltaY = Math.abs(currentY - startY);
+
+                        if (deltaY > deltaX && deltaY > 5) {
+                            isScrolling = true;
+                            return; 
+                        }
+                        
+                        if ((deltaX > deltaY && deltaX > 5) || (deltaX > 5 && deltaY > 5)) {
+                            isDrawing = true;
+                        }
+                    }
+
+                    if (isDrawing) {
+                        if (e.cancelable) e.preventDefault(); 
+                        const rect = canvas.getBoundingClientRect();
+                        const touch = e.touches[0];
+                        scratch(touch.clientX - rect.left, touch.clientY - rect.top);
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
-
