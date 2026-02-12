@@ -31,6 +31,7 @@
             justify-content: center;
             overflow: hidden; 
             text-align: center;
+            touch-action: pan-y; 
         }
 
         h1 {
@@ -147,6 +148,403 @@
             animation: popIn 0.3s ease-out;
             display: flex;
             flex-direction: column;
+            align-items: center;
+        }
+
+        .emoji-3d-img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+        }
+
+        #backBtn {
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #celebrationSection {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--soft-pink);
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 500;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 150px;
+        }
+
+        .photo-card {
+            position: relative;
+            width: 100%;
+            height: 300px; 
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            background: white;
+        }
+
+        .photo-card img.main-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.8s ease-out;
+            touch-action: pan-y; 
+        }
+        
+        .scratch-canvas.revealed {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mailSection {
+            margin-top: 50px;
+            margin-bottom: 80px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mail-trigger-img {
+            width: 110px;
+            height: 110px;
+            cursor: pointer;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+            animation: bounceMail 2s infinite;
+            transition: transform 0.3s;
+        }
+        .mail-trigger-img:hover { transform: scale(1.1); }
+
+        .feedback-box {
+            display: none; 
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 400px;
+            animation: popIn 0.5s ease-out;
+            position: relative;
+        }
+
+        .feedback-box h2 {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary-pink);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .feedback-box textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 2px solid var(--soft-pink);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        .feedback-box textarea:focus { outline: none; border-color: var(--primary-pink); }
+        .feedback-box button { background-color: var(--primary-pink); width: 100%; margin-top: 5px; }
+        
+        #thankYouMessage { display: none; text-align: center; padding: 20px; }
+        #thankYouMessage h2 { color: var(--primary-pink); font-size: 1.8rem; }
+        
+        .close-mail-btn {
+            background-color: #eee !important;
+            color: #555 !important;
+            margin-top: 15px !important;
+            font-size: 0.9rem !important;
+            width: auto !important;
+            display: inline-block !important;
+        }
+
+        #dimmedOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 0.5s;
+        }
+
+        .fly-away {
+            animation: flyOff 1.5s ease-in-out forwards;
+        }
+
+        .gift-img {
+            position: fixed;
+            bottom: -50px;
+            width: 60px;
+            height: 60px;
+            animation: floatUp 4s linear infinite;
+            z-index: 600;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+
+        @keyframes bounceMail { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+        @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+        @keyframes flyOff {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(40vw, -45vh) scale(0.2) rotate(45deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="loveSong" src="https://github.com/lolan-2x/valentine-site/raw/refs/heads/main/violin.mp3" loop></audio>
+
+    <div id="mainScreen">
+        <h1>Happy Valantines day Shifoo 
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png" class="inline-emoji" alt="Heart">
+        </h1>
+        <p class="subtext">will you marry me when we grow up? 
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Growing%20Heart.png" class="inline-emoji" alt="Pink Heart">
+        </p>
+        <div class="hint" id="hintBox">Don't press 'No'</div>
+        <div class="buttons">
+            <button id="yesBtn" onclick="sheSaidYes()">Yes</button>
+            <button id="noBtn" onclick="shePressedNo()">No</button>
+        </div>
+    </div>
+
+    <div id="angryModal">
+        <div class="modal-content">
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Smiling%20Face%20with%20Horns.png" class="emoji-3d-img" alt="Devil Face">
+            <h2>Do press Yes only!</h2>
+            <button id="backBtn" onclick="closeModal()">Back</button>
+        </div>
+    </div>
+
+    <div id="dimmedOverlay">
+        <lottie-player 
+            id="planeAnim"
+            src="https://assets9.lottiefiles.com/packages/lf20_x62chJ.json" 
+            background="transparent" 
+            speed="1" 
+            style="width: 300px; height: 300px;" 
+            loop 
+            autoplay>
+        </lottie-player>
+    </div>
+
+    <div id="celebrationSection">
+        <h1>Yay! love you vaave ! 
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png" class="inline-emoji" alt="Heart">
+        </h1>
+        <p>Scratch the pink cards to see our memories:</p>
+        
+        <div class="gallery" id="galleryContainer">
+            <div class="photo-card">
+                <img src="https://i.ibb.co/7JY3sm3Q/IMG-20260207-000817-png.png" class="main-photo" alt="Memory">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/SwrLSDbR/IMG-20260206-234609-png.png" class="main-photo" alt="Memory">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/d473XVYS/IMG-20260206-234702-png.png" class="main-photo" alt="Memory">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/k2txPyc5/IMG-20260206-234544-png.png" class="main-photo" alt="Memory">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/gFtmPRQ2/IMG-20260206-234725-png.png" class="main-photo" alt="Memory">
+            </div>
+             <div class="photo-card">
+                <img src="https://i.ibb.co/TBQx8jz4/IMG-20260206-234518-png.png" class="main-photo" alt="Memory">
+            </div>
+             <div class="photo-card">
+                <img src="https://i.ibb.co/pjnTy8Gj/IMG-20260206-234450-png.png" class="main-photo" alt="Memory">
+            </div>
+             <div class="photo-card">
+                <img src="https://i.ibb.co/cKVdpRyg/IMG-20260206-234805-png.png" class="main-photo" alt="Memory">
+            </div>
+             <div class="photo-card">
+                <img src="https://i.ibb.co/Fqg84CqS/IMG-20260206-234633-png.png" class="main-photo" alt="Memory">
+            </div>
+             <div class="photo-card">
+                <img src="https://i.ibb.co/x8PYrbZP/IMG-20260206-234424-png.png" class="main-photo" alt="Memory">
+            </div>
+        </div>
+
+        <div id="mailSection">
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Open%20Mailbox%20with%20Raised%20Flag.png" id="mailTrigger" class="mail-trigger-img" onclick="openMail()" alt="Mailbox">
+            
+            <div class="feedback-box" id="feedbackBox">
+                <div id="formContainer">
+                    <h2>Say something to me 
+                        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Growing%20Heart.png" class="inline-emoji" alt="Heart">
+                    </h2>
+                    <p>(Only I can read this)</p>
+                    
+                    <iframe name="hiddenFrame" style="display:none;"></iframe>
+                    <form action="https://formspree.io/f/mnjbqqro" method="POST" target="hiddenFrame" onsubmit="showThankYou()">
+                        <textarea name="message" placeholder="Type your feelings here..." required></textarea>
+                        <button type="submit">Send 💌</button>
+                    </form>
+                </div>
+                
+                <div id="thankYouMessage">
+                    <h2>Message Sent! 💌</h2>
+                    <p>I can't wait to read it.</p>
+                    <p style="font-size: 3rem; text-align: center;">
+                        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png" class="inline-emoji" style="width: 80px; height: 80px;" alt="Heart">
+                    </p>
+                    <button class="close-mail-btn" onclick="closeMail()">Close</button>
+                    <br>
+                    <button class="home-btn" onclick="goHome()">Go Home 🏠</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let vibrateInterval;
+
+        function shePressedNo() {
+            const noBtn = document.getElementById('noBtn');
+            const modal = document.getElementById('angryModal');
+            noBtn.classList.add('angry-mode');
+            modal.style.display = 'flex';
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+                vibrateInterval = setInterval(() => {
+                    navigator.vibrate([200, 100, 200]);
+                }, 1000);
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('angryModal');
+            const noBtn = document.getElementById('noBtn');
+            modal.style.display = 'none';
+            noBtn.classList.remove('angry-mode');
+            if (vibrateInterval) {
+                clearInterval(vibrateInterval);
+                navigator.vibrate(0);
+            }
+        }
+
+        function sheSaidYes() {
+            const mainScreen = document.getElementById('mainScreen');
+            const celebration = document.getElementById('celebrationSection');
+            const audio = document.getElementById('loveSong');
+
+            if(audio) {
+                audio.play().catch(error => {
+                    console.log("Audio Error: " + error);
+                });
+            }
+
+            mainScreen.style.display = 'none';
+            celebration.style.display = 'block';
+
+            initScratchCards();
+            createFallingGifts();
+        }
+
+        function openMail() {
+            document.getElementById('mailTrigger').style.display = 'none';
+            document.getElementById('feedbackBox').style.display = 'block';
+        }
+
+        function closeMail() {
+            document.getElementById('feedbackBox').style.display = 'none';
+            document.getElementById('mailTrigger').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('formContainer').style.display = 'block';
+                document.getElementById('thankYouMessage').style.display = 'none';
+                document.querySelector('form').reset();
+            }, 500);
+        }
+
+        function showThankYou() {
+            const overlay = document.getElementById('dimmedOverlay');
+            const lottie = document.getElementById('planeAnim');
+            
+            overlay.style.display = 'flex';
+            document.getElementById('formContainer').style.display = 'none';
+            
+            lottie.classList.remove('fly-away'); 
+            lottie.classList.remove('animate__bounceInUp'); 
+            void lottie.offsetWidth; 
+
+            lottie.classList.add('animate__animated', 'animate__bounceInUp');
+
+            setTimeout(() => {
+                lottie.classList.remove('animate__bounceInUp');
+                lottie.classList.add('fly-away');
+            }, 1000);
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.getElementById('thankYouMessage').style.display = 'block';
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            }, 2500);
+        }
+
+        function goHome() {
+            document.getElementById('celebrationSection').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+            const yesBtn = document.getElementById('yesBtn');
+            yesBtn.innerText = "Memories 💖";
+            document.getElementById('noBtn').style.display = 'none';
+            document.getElementById('hintBox').style.display = 'none';
+            closeMail();
+        }
+
+        function createFallingGifts() {
+            const giftUrls = [
+                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Ring.png",
+                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Ribbon.png",
+                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Ribbon.png",
+                "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Wrapped%20G            flex-direction: column;
             align-items: center;
         }
 
@@ -618,3 +1016,4 @@
     </script>
 </body>
 </html>
+
